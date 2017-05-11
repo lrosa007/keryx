@@ -9,7 +9,7 @@ defmodule Keryx.Application do
     # Define workers and child supervisors to be supervised
     children = [
       # Start the Ecto repository
-      supervisor(Keryx.Repo, []),
+      # supervisor(Keryx.Repo, []),
       # Start the endpoint when the application starts
       supervisor(Keryx.Web.Endpoint, []),
       # Start your own worker by calling: Keryx.Worker.start_link(arg1, arg2, arg3)
