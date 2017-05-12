@@ -11,5 +11,5 @@ defmodule Keryx.Web.UserSocket do
     {:ok, assign(socket, :user_id, user_id)}
   end
 
-  def id(_socket), do: "user_socket:#{socket.assigns.user_id}"
+  def id(socket), do: "user_socket:#{socket.assigns.user_id}"
 end

@@ -51,6 +51,8 @@ defmodule Keryx.Web do
     quote do
       use Phoenix.Channel
       import Keryx.Web.Gettext
+      import Ecto
+      import Ecto.Query
     end
   end
 

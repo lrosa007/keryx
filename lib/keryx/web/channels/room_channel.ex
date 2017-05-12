@@ -1,8 +1,8 @@
 defmodule Keryx.Web.Channel do
   use Keryx.Web, :channel
 
-  def join("room:" <> room_id, payload, socket) do
-    room = Keryx.Chat.Room.get_room!(room_id)
+  def join("room:" <> room_id, _payload, socket) do
+    room = Keryx.Chat.get_room!(room_id)
 
     messages =
       Keryx.Chat.Message
@@ -12,7 +12,7 @@ defmodule Keryx.Web.Channel do
       |> Keryx.Repo.all
 
     response = %{
-      room: Phoenix.View.render_one(room, Keryx.Web.RoomView, "room.json")
+      room: Phoenix.View.render_one(room, Keryx.Web.RoomView, "room.json"),
       messages: Phoenix.View.render_many(messages, Keryx.Web.MessageView, "message.json")
     }
 
@@ -37,7 +37,7 @@ defmodule Keryx.Web.Channel do
   end
 
   defp broadcast_message(socket, message) do
-    message = Repo.preload(message, :user)
+    message = Keryx.Repo.preload(message, :user)
     rendered_message = Phoenix.View.render_one(message, Keryx.Web.MessageView, "message.json")
     broadcast!(socket, "message_created", rendered_message)
   end

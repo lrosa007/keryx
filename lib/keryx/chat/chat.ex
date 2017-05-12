@@ -10,8 +10,8 @@ defmodule Keryx.Chat do
 
   def get_message!(id), do: Repo.get!(Message, id)
 
-  def create_message(attrs \\ %{}) do
-    %Message{}
+  def create_message(message \\ %Message{}, attrs \\ %{}) do
+    message
     |> message_changeset(attrs)
     |> Repo.insert()
   end
