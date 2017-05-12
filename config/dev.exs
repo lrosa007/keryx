@@ -43,4 +43,5 @@ config :keryx, Keryx.Repo,
   password: "postgres",
   database: "keryx_dev",
   hostname: "localhost",
+  port: 5433,
   pool_size: 10
