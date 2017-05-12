@@ -1,15 +1,15 @@
 defmodule Keryx.Web.OrganizationControllerTest do
   use Keryx.Web.ConnCase
 
-  alias Keryx.Clients
-  alias Keryx.Clients.Organization
+  alias Keryx.Accounts
+  alias Keryx.Accounts.Organization
 
   @create_attrs %{name: "some name"}
   @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
   def fixture(:organization) do
-    {:ok, organization} = Clients.create_organization(@create_attrs)
+    {:ok, organization} = Accounts.create_organization(@create_attrs)
     organization
   end
 

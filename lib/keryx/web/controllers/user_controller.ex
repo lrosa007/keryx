@@ -1,18 +1,18 @@
 defmodule Keryx.Web.UserController do
   use Keryx.Web, :controller
 
-  alias Keryx.Clients
-  alias Keryx.Clients.User
+  alias Keryx.Accounts
+  alias Keryx.Accounts.User
 
   action_fallback Keryx.Web.FallbackController
 
   def index(conn, _params) do
-    users = Clients.list_users()
+    users = Accounts.list_users()
     render(conn, "index.json", users: users)
   end
 
   def create(conn, %{"user" => user_params}) do
-    with {:ok, %User{} = user} <- Clients.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
@@ -21,21 +21,21 @@ defmodule Keryx.Web.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Clients.get_user!(id)
+    user = Accounts.get_user!(id)
     render(conn, "show.json", user: user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Clients.get_user!(id)
+    user = Accounts.get_user!(id)
 
-    with {:ok, %User{} = user} <- Clients.update_user(user, user_params) do
+    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
       render(conn, "show.json", user: user)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Clients.get_user!(id)
-    with {:ok, %User{}} <- Clients.delete_user(user) do
+    user = Accounts.get_user!(id)
+    with {:ok, %User{}} <- Accounts.delete_user(user) do
       send_resp(conn, :no_content, "")
     end
   end

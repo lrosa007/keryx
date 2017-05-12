@@ -1,15 +1,15 @@
 defmodule Keryx.Web.UserControllerTest do
   use Keryx.Web.ConnCase
 
-  alias Keryx.Clients
-  alias Keryx.Clients.User
+  alias Keryx.Accounts
+  alias Keryx.Accounts.User
 
   @create_attrs %{name: "some name"}
   @update_attrs %{name: "some updated name"}
   @invalid_attrs %{name: nil}
 
   def fixture(:user) do
-    {:ok, user} = Clients.create_user(@create_attrs)
+    {:ok, user} = Accounts.create_user(@create_attrs)
     user
   end
 
